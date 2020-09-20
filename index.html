@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>JavaScript Practice</title>
+  <style>
+    body{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .box{
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+      cursor: pointer;
+      /* cssでアニメーションを追加するときは、以下のように変化させたい要素にtransition＋秒数を記述する。これでアニメーションにかける時間を指定する。 */
+      transition: 0.8s;
+      margin: 0 8px 8px 0;
+    }
+    .circle{
+        background: pink;
+        border-radius: 50%;
+        /* transformでアニメーションの内容を記述。今回は360°回転させるというものである。 */
+        transform: rotate(360deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="box target1"></div>
+  <div class="box target2"></div>
+  <div class="box target3"></div>
+
+  <script>
+    //  use strictを使用すると、JavaScript動作はするが予期せぬエラーを引き起こしそうな細かなミスを防いでくれる。
+    'use strict';
+    //  addEventListenerはイベントに合わせて実行させる関数を登録するメソッド。この場合は、クリックしたらtargetの背景をピンクにする関数が動くというように指定している。documentは文書全体、.は接続の意味を示す。() => はアロー関数と呼ばれるもので最近はこの書き方が主流である。JavaScriptでは大文字小文字を区別するため、小文字にすると動かない場合もある。エラーが出たら、ディベロッパーツールのコンソールから確認する。エラーメッセージは英語でとっつきにくいが根気強く調べよう。
+
+    // 定数を指定してあげることで、コードを短縮できる。また、変更があっても１箇所書き換えれば全て直せるので、積極的に使っていくべき。
+    const target1 = document.getElementsByClassName('target1')[0];
+    const target2 = document.getElementsByClassName('target2')[0];
+    const target3 = document.getElementsByClassName('target3')[0];
+
+    target1.addEventListener('click', () => {
+    // document.getElementById('target').style.background = 'pink';
+    // document.getElementById('target').style.borderRadius = '50%'
+    // toggleを使うと、クラスがついてたら外す、外れてたらつけるという操作が出来る。addだとクラスを加えるだけで外すことが出来ない。
+      target1.classList.toggle('circle');
+    });
+
+    target2.addEventListener('click', () => {
+      target2.classList.toggle('circle');
+    });
+
+    target3.addEventListener('click', () => {
+      target3.classList.toggle('circle');
+    });
+
+  </script>
+</body>
+</html>
