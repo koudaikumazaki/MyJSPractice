@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>JavaScript Practice</title>
+  <style>
+    h1{
+      text-align: center;
+    }
+    main{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .box{
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+      cursor: pointer;
+      /* cssでアニメーションを追加するときは、以下のように変化させたい要素にtransition＋秒数を記述する。これでアニメーションにかける時間を指定する。 */
+      transition: 0.8s;
+      margin: 0 8px 8px 0;
+      text-align: center;
+      line-height: 100px;
+    }
+    .win{
+        background: pink;
+        border-radius: 50%;
+        /* transformでアニメーションの内容を記述。今回は360°回転させるというものである。 */
+        transform: rotate(360deg);
+    }
+    .lose{
+      transform: scale(0.9);
+    }
+  </style>
+</head>
+<body>
+  <h1>宝探しゲーム</h1>
+  <main id="parent"></main>
+    <script>
+      'use strict';
+        const num = 5;
+        const winner = Math.floor(Math.random() * num); //0-4
+        const parent = document.getElementById('parent');
+        // for文で繰り返し処理を行う。変数と初期値を設定し、変数の繰り返し限界値を設定、＋＋で変数を１ずつ増やしていくと指定。あとは{}内に繰り返したい処理を書き込むのみ。各パラメーターの区切りとして；を使用すること、繰り返し処理の後ろに；を付けないことに気を付ける。この場合だと、０から９まで処理を繰り返して、１０になったら繰り返しをやめるという処理になる。 
+        for (let i = 0; i < num; i++) {
+          // createElement（''）で（）内の要素を作る
+          const div = document.createElement('div');
+          div.classList.add('box');
+          // textContentで、テキストの中身を記載できる。
+          // 動作を記述したあと、,を入れるのを忘れないように！
+          div.addEventListener('click',  () => {
+            if (i === winner) {
+              div.textContent = 'Win!';
+              div.classList.add('win');
+            } else {
+              div.textContent = 'lose!';
+              div.classList.add('lose');   
+            }
+          });
+    
+        // ドキュメントのbody要素の子要素としてdivを追加する。appendChildで子要素として表示させる。
+        parent.appendChild(div);
+      }
+    </script>
+  
+</body>
+</html>
